@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Rentals</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dark.css') }}">
+
+</head>
+<body>
+    {% include "_navbar.html" %}
+
+
+    <h1>All Rentals</h1>
+
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>User</th>
+            <th>Car</th>
+            <th>Period</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+
+        {% for r in rentals %}
+        <tr>
+            <td>{{ r.rental_id }}</td>
+            <td>{{ r.first_name }} {{ r.last_name }}</td>
+            <td>{{ r.car_name }} ({{ r.brand }})</td>
+            <td>{{ r.start_date }} → {{ r.end_date }}</td>
+            <td>{{ r.rental_status }}</td>
+            <td>
+                {% if r.status == 'active' %}
+                    <a href="/rentals/complete/{{ r.rental_id }}">Complete Rental</a>
+                {% endif %}
+                <a href="/payments/{{ r.rental_id }}">View Payments</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <script>
+function toggleDarkMode() {
+    document.body.classList.toggle("dark");
+}
+</script>
+
+</body>
+</html>

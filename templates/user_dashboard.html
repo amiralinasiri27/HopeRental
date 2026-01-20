@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='dark.css') }}">
+
+</head>
+<body>
+  {% include "_navbar.html" %}
+
+
+  <h1>User Dashboard</h1>
+
+<div>
+    <p>My Rentals: {{ stats.my_rentals }}</p>
+    <p>Active Rentals: {{ stats.active_rentals }}</p>
+    <p>Total Paid: {{ stats.my_payments }}</p>
+</div>
+
+<hr>
+
+<ul>
+    <li><a href="/cars">Browse Cars</a></li>
+    <li><a href="/my-rentals">My Rentals</a></li>
+</ul>
+
+<hr>
+
+<h2>Search Cars</h2>
+
+<form method="get" action="/dashboard/search/cars">
+    <input type="text" name="brand" placeholder="Brand">
+
+    <select name="status">
+        <option value="">All</option>
+        <option value="available">Available</option>
+        <option value="rented">Rented</option>
+    </select>
+
+    <button type="submit">Search</button>
+</form>
+<script>
+function toggleDarkMode() {
+    document.body.classList.toggle("dark");
+}
+</script>
+
+</body>
+</html>

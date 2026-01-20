@@ -1,0 +1,48 @@
+/* ===== Dark Mode ===== */
+
+body.dark {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+/* Navbar */
+
+body.dark .navbar {
+    background: linear-gradient(90deg, #0d3b2e, #1e88e5);
+}
+
+/* Cards & boxes */
+
+body.dark .stat-card,
+body.dark table {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.6);
+}
+
+/* Tables */
+
+body.dark table th {
+    background-color: #263238;
+    color: #4fc3f7;
+}
+
+body.dark table td {
+    border-color: #333;
+}
+
+/* Links */
+
+body.dark a {
+    color: #4fc3f7;
+}
+
+/* Buttons */
+
+body.dark .nav-dashboard {
+    background-color: rgba(255,255,255,0.15);
+}
+
+body.dark .nav-logout {
+    background-color: #b71c1c;
+}

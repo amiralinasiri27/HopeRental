@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Access Denied</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dark.css') }}">
+</head>
+<body>
+    {% include "_navbar.html" %}
+
+
+    <h1>⛔ Access Denied</h1>
+
+    <p>
+        You do not have permission to access this page.
+    </p>
+
+    <p>
+        This page is restricted to <strong>admin users</strong>.
+    </p>
+
+    <a href="/cars">
+        <button>⬅ Back to Cars</button>
+    </a>
+    <script>
+function toggleDarkMode() {
+    document.body.classList.toggle("dark");
+}
+</script>
+
+</body>
+</html>

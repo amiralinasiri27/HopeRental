@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payments</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dark.css') }}">
+
+</head>
+<body>
+    <title>Payments</title>
+</head>
+<body>
+    {% include "_navbar.html" %}
+
+<h1>All Payments</h1>
+{% if payments %}
+<table border="1">
+    <tr>
+        <th>Payment ID</th>
+        <th>User</th>
+        <th>Rental ID</th>
+        <th>Total Price</th>
+        <th>Period</th>
+        <th>Amount Paid</th>
+        <th>Payment Method</th>
+        <th>Status</th>
+        <th>Payment Date</th>
+    </tr>
+
+    {% for p in payments %}
+    <tr>
+        <td>{{ p.payment_id }}</td>
+        <td>{{ p.user_name }}</td>
+        <td>{{ p.rental_id }}</td>
+        <td>{{ p.total_price }}</td>
+        <td>{{ p.start_date }} → {{ p.end_date }}</td>
+        <td>{{ p.amount }}</td>
+        <td>{{ p.payment_method }}</td>
+        <td>{{ p.payment_status }}</td>
+        <td>{{ p.payment_date }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% else %}
+    <p>No payments for this rental yet.</p>
+{% endif %}
+<script>
+function toggleDarkMode() {
+    document.body.classList.toggle("dark");
+}
+</script>
+
+</body>
+</html>

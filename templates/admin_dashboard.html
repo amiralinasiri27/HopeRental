@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='dark.css') }}">
+
+</head>
+<body>
+  {% include "_navbar.html" %}
+
+  <h1>Admin Dashboard</h1>
+
+<div>
+    <p>Total Cars: {{ stats.total_cars }}</p>
+    <p>Available Cars: {{ stats.available_cars }}</p>
+    <p>Total Rentals: {{ stats.total_rentals }}</p>
+    <p>Total Income: {{ stats.total_income }}</p>
+</div>
+
+<hr>
+
+<h3>Quick Access</h3>
+<ul>
+    <li><a href="/cars">All Cars</a></li>
+    <li><a href="/rentals">All Rentals</a></li>
+    <li><a href="/payments">All Payments</a></li>
+</ul>
+
+<hr>
+
+
+<h2>Search Cars</h2>
+
+<form method="get" action="/dashboard/search/cars">
+    <input type="text" name="brand" placeholder="Brand">
+
+    <select name="status">
+        <option value="">All</option>
+        <option value="available">Available</option>
+        <option value="rented">Rented</option>
+    </select>
+
+    <button type="submit">Search</button>
+</form>
+<script>
+function toggleDarkMode() {
+    document.body.classList.toggle("dark");
+}
+</script>
+
+
+</body>
+</html>

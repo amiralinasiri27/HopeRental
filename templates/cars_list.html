@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cars</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dark.css') }}">
+
+</head>
+<body>
+    {% include "_navbar.html" %}
+
+    <h1>Cars List</h1>
+
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Brand</th>
+            <th>Type</th>
+            <th>Year</th>
+            <th>Daily Price</th>
+            <th>Status</th>
+            <th>description</th>
+            <th>Action</th>
+        </tr>
+
+        {% for car in cars %}
+        <tr>
+            <td>{{ car.car_id }}</td>
+            <td>{{ car.name }}</td>
+            <td>{{ car.brand }}</td>
+            <td>{{ car.body_type }}</td>
+            <td>{{ car.production_year }}</td>
+            <td>{{ car.daily_rent_price }}</td>
+            <td>{{ car.status }}</td>
+            <td>{{ car.description }}</td>
+            <td><a href="/rent/{{ car.car_id }}">Rent</a></td>
+
+        </tr>
+        {% endfor %}
+    </table>
+
+
+    <a href="/cars/add">Add new car</a>
+    <script>
+function toggleDarkMode() {
+    document.body.classList.toggle("dark");
+}
+</script>
+
+</body>
+</html>

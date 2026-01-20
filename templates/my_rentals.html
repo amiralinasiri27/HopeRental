@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Rentals | HOPE Rental</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dark.css') }}">
+</head>
+<body>
+{% include "_navbar.html" %}
+
+
+<h1>My Rentals</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Car</th>
+            <th>Period</th>
+            <th>Total Price</th>
+            <th>Status</th>
+            <th>Paid</th>
+            <th>Remaining</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for r in rentals %}
+        <tr>
+            <td>{{ r.rental_id }}</td>
+            <td>{{ r.car_name }} ({{ r.brand }})</td>
+            <td>{{ r.start_date }} → {{ r.end_date }}</td>
+            <td>{{ r.total_price }}</td>
+            <td>{{ r.status }}</td>
+            <td>{{ r.paid }}</td>
+            <td>{{ r.remaining }}</td>
+            <td>
+                {% if r.status == 'completed' and r.remaining > 0 %}
+                    <a href="/payments/pay/{{ r.rental_id }}">Pay</a>
+                {% else %}
+                    -
+                {% endif %}
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="8">No rentals found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% if from_dashboard %}
+    <br>
+{% endif %}
+
+<script>
+function toggleDarkMode() {
+    document.body.classList.toggle("dark");
+}
+</script>
+
+
+</body>
+</html>

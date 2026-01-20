@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rent Car</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dark.css') }}">
+
+</head>
+<body>
+    {% include "_navbar.html" %}
+
+    <h1>Rent {{ car.name }} - {{ car.brand }}</h1>
+
+    <p>Daily price: {{ car.daily_rent_price }}</p>
+
+    <form method="post">
+    <label>Start date</label><br>
+    <input type="date" name="start_date" required><br><br>
+
+    <label>End date</label><br>
+    <input type="date" name="end_date" required><br><br>
+
+    <label>Pickup location</label><br>
+    <input type="text" name="pickup_location" required><br><br>
+
+    <button type="submit">Confirm Rental</button>
+</form>
+
+
+    <a href="/cars">Back</a>
+    <script>
+function toggleDarkMode() {
+    document.body.classList.toggle("dark");
+}
+</script>
+
+</body>
+</html>
