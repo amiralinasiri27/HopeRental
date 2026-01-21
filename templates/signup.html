@@ -8,24 +8,22 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='dark.css') }}">
 
 </head>
-<body>
+<body align="center">
   <form method="post">
-    <input type="text" name="first_name" placeholder="First Name" required>
-    <input type="text" name="last_name" placeholder="Last Name" required>
-    <input type="email" name="email" placeholder="Email" required>
-    <input type="password" name="password" placeholder="Password" required>
-    <input type="text" name="phone_number" placeholder="Phone" required>
-    <select name="role">
+    <div><input type="text" name="first_name" placeholder="First Name" required></div>
+    <div><input type="text" name="last_name" placeholder="Last Name" required></div>
+    <div><input type="email" name="email" placeholder="Email" required></div>
+    <div><input type="password" name="password" placeholder="Password" required></div>
+    <div><input type="text" name="phone_number" placeholder="Phone" required></div>
+    <!-- <div><select name="role">
         <option value="user">User</option>
         <option value="admin">Admin</option>
-    </select>
-    <button type="submit">Sign Up</button>
+    </select></div> -->
+    <div><button type="submit">Sign Up</button></div>
 </form>
-<script>
-function toggleDarkMode() {
-    document.body.classList.toggle("dark");
-}
-</script>
-
+<p>
+        Have an Account?
+        <a href="{{ url_for('login') }}" class="signup-link">Login</a>
+    </p>
 </body>
 </html>

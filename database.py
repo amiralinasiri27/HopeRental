@@ -47,6 +47,45 @@ def get_car_by_id(car_id):
     conn.close()
     return car
 
+# بروزرسانی خودرو
+def update_car(car_id, name, brand, daily_price, status):
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute("""
+        UPDATE cars
+        SET name = %s,
+            brand = %s,
+            daily_price = %s,
+            status = %s
+        WHERE car_id = %s
+    """, (name, brand, daily_price, status, car_id))
+    conn.commit()
+    cur.close()
+    conn.close()
+
+
+def get_active_rentals_for_car(car_id):
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute("""
+        SELECT 1 FROM rentals
+        WHERE car_id = %s AND status = 'active'
+    """, (car_id,))
+    result = cur.fetchall()
+    cur.close()
+    conn.close()
+    return result
+
+
+def delete_car(car_id):
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute("DELETE FROM cars WHERE car_id = %s", (car_id,))
+    conn.commit()
+    cur.close()
+    conn.close()
+
+
 def search_cars(brand, status):
     conn = get_connection()
     cur = conn.cursor(cursor_factory=RealDictCursor)
@@ -77,6 +116,18 @@ def search_cars(brand, status):
     cars = cur.fetchall()
     conn.close()
     return cars
+
+def set_car_available(car_id):
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute("""
+        UPDATE cars
+        SET status = 'available'
+        WHERE car_id = %s
+    """, (car_id,))
+    conn.commit()
+    cur.close()
+
 
 # ---------------- RENTALSS ----------------
 
@@ -208,22 +259,33 @@ def complete_rental(rental_id):
     cur.close()
     conn.close()
 
-# ---------------- PAYMENTS ----------------
-
-def add_payment(rental_id, amount, payment_method):
+def update_rental_status(rental_id, new_status):
     conn = get_connection()
     cur = conn.cursor()
-
-    # ثبت پرداخت به صورت pending
     cur.execute("""
-        INSERT INTO payments
-        (rental_id, amount, payment_method, status)
-        VALUES (%s, %s, %s, 'pending')
-    """, (rental_id, amount, payment_method))
-
+        UPDATE rentals
+        SET status = %s
+        WHERE rental_id = %s
+    """, (new_status, rental_id))
     conn.commit()
     cur.close()
     conn.close()
+
+
+# ---------------- PAYMENTS ----------------
+
+def add_payment(rental_id, amount, method):
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute("""
+        INSERT INTO payments (rental_id, amount, payment_date, status, payment_method)
+        VALUES (%s, %s, NOW(), 'completed', %s)
+    """, (rental_id, amount, method))
+    conn.commit()
+    cur.close()
+    conn.close()
+
+
     
 def get_all_payments():
     conn = get_connection()

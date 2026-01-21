@@ -12,6 +12,18 @@
 
     <h1>All Rentals</h1>
 
+    {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="flash-messages">
+      {% for category, msg in messages %}
+        <div class="flash {{ category }}">
+            {{ msg }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
     <table border="1">
         <tr>
             <th>ID</th>
@@ -20,6 +32,7 @@
             <th>Period</th>
             <th>Status</th>
             <th>Actions</th>
+            <th>Complete</th>
         </tr>
 
         {% for r in rentals %}
@@ -35,14 +48,18 @@
                 {% endif %}
                 <a href="/payments/{{ r.rental_id }}">View Payments</a>
             </td>
+            {% if r.status != 'completed' %}
+            <td>
+                <form action="{{ url_for('complete_rental', rental_id=r.rental_id) }}" method="POST" style="display:inline;">
+    <button type="submit" class="btn-complete">Complete Rental</button>
+</form>
+            </td>
+{% endif %}
+
         </tr>
         {% endfor %}
     </table>
-    <script>
-function toggleDarkMode() {
-    document.body.classList.toggle("dark");
-}
-</script>
+
 
 </body>
 </html>

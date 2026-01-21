@@ -276,3 +276,51 @@ body {
 .nav-logout:hover {
     background-color: #9e1f1f;
 }
+
+.flash-container {
+    margin-bottom: 15px;
+}
+
+.flash {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* موفقیت */
+.flash.success {
+    background-color: #4caf50; /* سبز */
+    color: white;
+}
+
+/* خطا */
+.flash.error {
+    background-color: #f44336; /* قرمز */
+    color: white;
+}
+
+.flash-messages {
+    margin: 10px 0;
+}
+
+.flash {
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: white;
+}
+
+/* دسته‌بندی رنگ‌ها */
+.flash.success {
+    background-color: #28a745; /* سبز */
+}
+
+.flash.error {
+    background-color: #dc3545; /* قرمز */
+}
+
+.flash.info {
+    background-color: #17a2b8; /* آبی */
+}
