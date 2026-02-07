@@ -55,7 +55,7 @@ def update_car(car_id, name, brand, daily_price, status):
         UPDATE cars
         SET name = %s,
             brand = %s,
-            daily_price = %s,
+            daily_rent_price = %s,
             status = %s
         WHERE car_id = %s
     """, (name, brand, daily_price, status, car_id))
