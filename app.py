@@ -1,4 +1,3 @@
-# app.py
 from flask import Flask, render_template
 from flask import request, redirect
 from flask import Flask, render_template, request, redirect, url_for, session, abort, flash
@@ -8,6 +7,8 @@ app = Flask(__name__)
 
 from flask import Flask, redirect, url_for
 
+from dotenv import load_dotenv
+load_dotenv()
 
 @app.route("/")
 def index():
